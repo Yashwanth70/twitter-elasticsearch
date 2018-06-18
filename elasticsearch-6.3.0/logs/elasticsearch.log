@@ -50,3 +50,10 @@
 [2018-06-19T00:09:08,845][INFO ][o.e.l.LicenseService     ] [lwXRSRU] license [f9b128bb-0133-49e3-899e-113c92cac85d] mode [basic] - valid
 [2018-06-19T00:09:08,939][INFO ][o.e.g.GatewayService     ] [lwXRSRU] recovered [1] indices into cluster_state
 [2018-06-19T00:09:20,484][INFO ][o.e.c.r.a.AllocationService] [lwXRSRU] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[my-tweets][3]] ...]).
+[2018-06-19T01:01:11,917][INFO ][o.e.n.Node               ] [lwXRSRU] stopping ...
+[2018-06-19T01:01:11,948][INFO ][o.e.x.w.WatcherService   ] [lwXRSRU] stopping watch service, reason [shutdown initiated]
+[2018-06-19T01:01:12,263][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/8712] [Main.cc@148] Ml controller exiting
+[2018-06-19T01:01:12,263][INFO ][o.e.x.m.j.p.NativeController] Native controller process has stopped - no new native processes can be started
+[2018-06-19T01:01:12,332][INFO ][o.e.n.Node               ] [lwXRSRU] stopped
+[2018-06-19T01:01:12,347][INFO ][o.e.n.Node               ] [lwXRSRU] closing ...
+[2018-06-19T01:01:12,363][INFO ][o.e.n.Node               ] [lwXRSRU] closed
