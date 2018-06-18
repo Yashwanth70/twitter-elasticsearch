@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<title>Frrole -Twitter Api</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form id="search-form">
+  Search Keyword: <input type="text" value="" name="search" id="query"><br>
+  <button type="submit">Search</button>
+</form>
+<div id="response">
+	
+</div>
+
+<script>
+$(document).ready(function() {
+  $("#search-form").submit(function(e){
+    e.preventDefault();
+    var query = document.getElementById('query').value;
+    var url = 'http://localhost:9200/my-tweets/_search?q='+query+'&size=100';
+    fetch(url).then(function(response) {
+	  return response.json();
+	}).then(function(data) {
+	  // var count = data.hits.hits.length;
+	  // console.log(count);
+	  var tweets_filtered = data.hits.hits;
+	  var html = '';
+	  for(var i in tweets_filtered)
+		{
+		    var source = tweets_filtered[i]._source;
+		    html += '<p>'+source.author+' : '+source.message+'</p>'
+		}
+		$("#response").html(html);
+	}).catch(function() {
+	  console.log("Error");
+	});
+  });
+})
+</script>
+</body>
+</html>
