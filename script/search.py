@@ -10,7 +10,17 @@ print("Ok. I've got an index of {0} documents. Let's do some searches...".format
 while True:
         try:
             query = input("Enter a search: ")
-            result = es.search(index="my-tweets", doc_type='tweet', body={"size": "100", "query": {"match": {"message": query.strip()}}})
+            result = es.search(index="my-tweets", doc_type='tweet', body={"size": "100", "query": {
+    "bool": {
+        "must":     { "match": { "message":  query.strip() }},
+        "filter": {
+          "range": { "date": { "gte": "2018-06-01" }} 
+        }
+    }
+}
+
+
+            	})
             print("Got %d Hits:" % result['hits']['total'])
             for hit in result['hits']['hits']:
                 print("%(date)s %(author)s: %(message)s" % hit["_source"])

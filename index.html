@@ -8,7 +8,12 @@
 <body>
 
 <form id="search-form">
-  Search Keyword: <input type="text" value="" name="search" id="query"><br>
+  Search Keyword: <input type="text" value="" name="search" id="query">
+  <br>
+  From Date: <input type="date" id="fromDate" value="2018-06-01">
+  <br>
+  To Date: <input type="date" id="toDate" value="2018-06-19">
+  <br>
   <button type="submit">Search</button>
 </form>
 <div id="response">
@@ -21,7 +26,23 @@ $(document).ready(function() {
     e.preventDefault();
     var query = document.getElementById('query').value;
     var url = 'http://localhost:9200/my-tweets/_search?q='+query+'&size=100';
-    fetch(url).then(function(response) {
+    var from_date = document.getElementById("fromDate").value;
+    var to_date = document.getElementById("toDate").value;
+    
+	fetch('http://localhost:9200/my-tweets/_search', {
+		body : JSON.stringify({"query": {
+    "bool": {
+        "must":     { "match": { "message":  query }},
+        "filter": {
+          "range": { "date": { "gte": from_date,"lte": to_date }} 
+        }
+    }
+},"size":"100"}),
+  headers: {
+    "Content-Type": "application/json"
+  },
+  method: "POST"
+}).then(function(response) {
 	  return response.json();
 	}).then(function(data) {
 	  // var count = data.hits.hits.length;
