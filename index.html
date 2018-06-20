@@ -29,7 +29,7 @@ $(document).ready(function() {
     var from_date = document.getElementById("fromDate").value;
     var to_date = document.getElementById("toDate").value;
     
-	fetch('http://localhost:9200/my-tweets/_search', {
+	fetch('http://localhost:5000/search', {
 		body : JSON.stringify({"query": {
     "bool": {
         "must":     { "match": { "message":  query }},
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	  return response.json();
 	}).then(function(data) {
 	  // var count = data.hits.hits.length;
-	  // console.log(count);
+	   //console.log(data);
 	  var tweets_filtered = data.hits.hits;
 	  var html = '';
 	  for(var i in tweets_filtered)
